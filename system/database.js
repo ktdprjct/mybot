@@ -1,4 +1,4 @@
-module.exports = (m) => {
+module.exports = (m, conn = { user: {} }) => {
     const isNumber = x => typeof x === 'number' && !isNaN(x)
     let user = global.db.data.users[m.sender]
     if (typeof user !== 'object') global.db.data.users[m.sender] = {}
@@ -80,8 +80,8 @@ module.exports = (m) => {
             })
         }
     }
-    let settings = global.db.data.settings
-    if (typeof settings !== 'object') global.db.data.settings = {}
+    let settings = global.db.data.settings[conn.user.jid]
+    if (typeof settings !== 'object') global.db.data.settings[conn.user.jid] = {}
     if (settings) {
         if (!('autodownload' in settings)) settings.autodownload = true
       	if (!('debug' in settings)) settings.debug = false
@@ -94,7 +94,7 @@ module.exports = (m) => {
         if (!('self' in settings)) settings.self = false
         if (!('mimic' in settings)) settings.mimic = []
         if (!('multiprefix' in settings)) settings.multiprefix = true
-    } else global.db.data.settings = {
+    } else global.db.data.settings[conn.user.jid] = {
         autodownload: true,
         chatbot: true,
         debug: false,
@@ -128,7 +128,7 @@ global.set.dfail = async (type, m, conn) => {
         download: `Fitur *Downloader* Tidak Aktif Silahkan Hubungi @${set.owner[0][0]} Untuk Mengaktifkannya`,
         restrict: `Fitur *Admin* Tidak Aktif Silahkan Hubungi @${set.owner[0][0]} Untuk Mengaktifkannya`,
     }[type]
-    if (msg) return conn.sendButton(m.chat, "\n*───「 ACCESS DENIED 」───*\n\n" + msg, set.wm, set.fla + "access denied", [['Menu', '.menu']], m, { asLocation: true, mentions: conn.parseMention(msg) })
+    if (msg) return conn.reply(m.chat, "\n*───「 ACCESS DENIED 」───*\n\n" + msg, m, { mentions: conn.parseMention(msg) })
     let unreg = { 
         unreg: `Belum *Terdaftar,* Silahkan Daftar Dengan Mengetik *#daftar nama.umur*\n\nContoh: *#daftar ${m.name}.17*`
     }[type]

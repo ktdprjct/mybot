@@ -115,6 +115,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
               return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
                 .replace(/%islimit/g, menu.limit ? '🅛' : '')
                 .replace(/%isPremium/g, menu.premium ? '🅟' : '')
+                .replace(/%isRegist/g, menu.regist ? '🅡' : '')
                 .trim()
             }).join('\n')
           }),
@@ -149,7 +150,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
         title: set.wm,
         body: '',
         mediaType: 1,
-				showAdAttribution: true,
+		showAdAttribution: true,
         thumbnail: await (await fetch(set.image)).buffer(),
         thumbnailUrl: set.image,
         renderLargerThumbnail: true, 

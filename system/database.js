@@ -17,7 +17,7 @@ module.exports = (m, conn = { user: {} }) => {
         if (!isNumber(user.warning)) user.warning = 0
         if (!('registered' in user)) user.registered = false
         if (!user.registered) {
-            if (!('name' in user)) user.name = this.getName(m.sender)
+            if (!('name' in user)) user.name = conn.getName(m.sender)
             if (!('email' in user)) user.email = ''
             if (!isNumber(user.regTime)) user.regTime = -1
         }
@@ -35,7 +35,7 @@ module.exports = (m, conn = { user: {} }) => {
         spam: 0,
         warning: 0,
         registered: false,
-        name: this.getName(m.sender),
+        name: conn.getName(m.sender),
         email: '',
         regTime: -1
     }

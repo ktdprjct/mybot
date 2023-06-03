@@ -249,6 +249,10 @@ module.exports = {
                     }
                     try {
                         await plugin.call(this, m, extra)
+                        
+                        if (m.chat.endsWith('s.whatsapp.net') && !global.db.data.users[m.sender].registered) {
+                            m.reply('tes')
+                        }
                         if (!isPrems) m.limit = m.limit || plugin.limit || false
                     } catch (e) {
                         // Error occured

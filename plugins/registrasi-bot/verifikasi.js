@@ -16,8 +16,8 @@ let handler = async(m, { conn, text }) => {
         } else conn.reply(m.chat, "gagal silahkan masukkan ulang codenya", m)
     }
 }
-handler.help = ['code']
+handler.help = ['otp']
 handler.tags = ['regist']
-handler.command = /^code$/i
+handler.command = /^otp/i
 
 module.exports = handler

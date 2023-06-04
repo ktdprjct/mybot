@@ -248,9 +248,9 @@ module.exports = {
                         expiration
                     }
                     try {
-                        await plugin.call(this, m, extra)
+                        //if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return this.reply(m.chat, "tes", m)
                         
-                        if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return conn.reply(m.chat, "tes", m)
+                        await plugin.call(this, m, extra)
                         if (!isPrems) m.limit = m.limit || plugin.limit || false
                     } catch (e) {
                         // Error occured

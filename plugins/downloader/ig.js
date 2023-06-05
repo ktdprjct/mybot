@@ -1,28 +1,56 @@
 let fetch = require("node-fetch")
-let handler = async (m, { conn, args, usedPrefix, command }) => {
+let got = require("got")
+let cheerio = require("cheerio")
+let { instagram } = require("@xct007/frieren-scraper")
+
+let handler = async (m, { command, usedPrefix, conn, text, args }) => {
     if (!global.db.data.users[m.sender].registered) {
         if (!m.chat.endsWith('g.us')) return conn.reply(m.chat, "testing", m)
     }
-    if (!args[0]) return m.reply(`*Masukan URL Instagram nya!*\n\nContoh : ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`)
-    if (!args[0].match(/(https:\/\/www.instagram.com)/gi)) return m.reply(status.invalid)
-    const results = await fetch(global.API('https://xzn.wtf', '/api/igdl', {
-        q: args[0]
-    }, 'ktdprjct'))
-    let json = await results.json()
-    if (!json.status) throw json
-    let name = conn.getName(m.sender)
+    
+    let lister = [
+        "v1",
+        "v2"
+    ]
+let spas = "                "
+    let [feature, inputs, inputs_, inputs__, inputs___] = text.split(" ")
+    if (!lister.includes(feature.toLowerCase())) return m.reply("*Example:*\n" + usedPrefix + command + " v2 link\n\n*Pilih type yg ada*\n" + lister.map((v, index) => "  ○ " + v.toUpperCase()).join("\n"))
 
-    conn.sendFile(m.chat, json.media, 'ig.mp4', `Caption: ${json.caption}\nLink: ${await shortlink(json.media)}\n\n` + set.wm,  fake.contact(parseInt(m.sender), name))
+    if (lister.includes(feature)) {
+        if (feature == "v1") {
+            if (!inputs) return m.reply("Input query link")
+            m.reply("Permintaan sedang di proses")
+                try {
+                let results = await instagram.v1(inputs)
+
+                let caption = `*[ I N S T A G R A M ]*`
+                let out = results[0].url
+                await m.reply("Permintaan sedang di proses")
+                await conn.sendFile(m.chat, out, "", caption, m)
+            } catch (e) {
+                await m.reply(eror)
+            }
+        }
+        if (feature == "v2") {
+            m.reply("dalam perbaikan")
+            /*if (!inputs) return m.reply("Input query link")
+            m.reply("Permintaan sedang di proses")
+                try {
+                let results = await (await fetch("https://fantox001-scrappy-api.vercel.app/instadl?url=" + inputs)).json()
+
+                let caption = `*[ I N S T A G R A M ]*`
+                let out = results.videoUrl
+
+                await m.reply("Permintaan sedang di proses")
+                await conn.sendFile(m.chat, out, "", caption, m)
+            } catch (e) {
+                await m.reply(eror)
+            }*/
+        }
+    }
 }
-handler.help = ['ig'].map(v => v + ' <url>')
+handler.help = ['instagram']
 handler.tags = ['downloader']
-
-handler.command = /^(Instagram|ig|igdl)$/i
-handler.limit = false
+handler.command = /^(ig(dl)?|instagram(dl)?)$/i
 
 module.exports = handler
-
-async function shortlink(url) {
-	isurl = /https?:\/\//.test(url)
-	return isurl ? (await require('axios').get('https://tinyurl.com/api-create.php?url='+encodeURIComponent(url))).data : ''
-}

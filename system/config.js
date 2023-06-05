@@ -25,7 +25,7 @@ const sticker_name = ""
 const sticker_author = `
 sticker = {
     hari: "${dayss}",
-    pukul: "${time}"
+    pukul: "${time}",
     tanggal: "${date}",
     botName: "ktdprjct-bot",
 }
@@ -56,6 +56,7 @@ global.set = {
     api: {
         name: { 
             s: {// API Prefix
+                xznapi: 'https://xzn.wtf',
                 neoxr: 'https://api.neoxr.my.id',
                 violet: 'https://violetics.pw',
                 xteam: 'https://api.xteam.xyz',
@@ -64,6 +65,7 @@ global.set = {
         },
         key: {
             s: {// APIKey Here
+               'https://xzn.wtf': 'ktdprjct'
                'https://api.neoxr.my.id': '5VC9rvNx',
                'https://violetics.pw': '0b55-fada-712f',
                'https://api.xteam.xyz': 'd90a9e986e18778b',

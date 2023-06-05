@@ -10,6 +10,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }, 'ktdprjct'))
     let json = await results.json()
     if (!json.status) throw json
+    let name = conn.getName(m.sender)
 
     conn.sendFile(m.chat, json.media, 'ig.mp4', `Caption: ${json.caption}\nLink: ${await shortlink(json.media)}\n\n` + set.wm,  fake.contact(parseInt(m.sender), name))
 }

@@ -1,11 +1,17 @@
-let instagramGetUrl = require('instagram-url-direct')
+let fetch = require("node-fetch")
 let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!global.db.data.users[m.sender].registered) {
+        if (!m.chat.endsWith('g.us')) return conn.reply(m.chat, "testing", m)
+    }
     if (!args[0]) return m.reply(`*Masukan URL Instagram nya!*\n\nContoh : ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`)
     if (!args[0].match(/(https:\/\/www.instagram.com)/gi)) return m.reply(status.invalid)
-    const results = (await instagramGetUrl(args[0]))
-    let name = conn.getName(m.sender)
+    const results = await fetch(global.API('https://xzn.wtf', '/api/igdl', {
+        q: args[0]
+    }, 'ktdprjct'))
+    let json = await results.json()
+    if (!json.status) throw json
 
-    conn.sendFile(m.chat, results.url_list[0], 'ig.mp4', `Link: ${await shortlink(results.url_list[0])}\n\n` + set.wm,  fake.contact(parseInt(m.sender), name))
+    conn.sendFile(m.chat, json.media, 'ig.mp4', `Caption: ${json.caption}\nLink: ${await shortlink(json.media)}\n\n` + set.wm,  fake.contact(parseInt(m.sender), name))
 }
 handler.help = ['ig'].map(v => v + ' <url>')
 handler.tags = ['downloader']

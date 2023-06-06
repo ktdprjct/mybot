@@ -81,6 +81,22 @@ global.set = {
     gc: 'https://chat.whatsapp.com/KZwneZawhyx5udc2XzUe7W',
 }
 
+let warn = global.db.data.users[m.sender].warning
+global.textWarn = `
+🚩 *[ ${warn} / 5 ]* Verifikasi nomor dengan menggunakan email, 1 email untuk memverifikasi 1 nomor WhatsApp. Silahkan ikuti step by step berikut :
+
+– *STEP 1*
+Gunakan perintah *reg <email>* untuk mendapatkan kode verifikasi melalui email.
+Contoh : *.reg ktdprjct@gmail.com*
+
+– *STEP 2*
+Buka email dan cek pesan masuk atau di folder spam, setelah kamu mendapat kode verifikasi silahkan kirim kode tersebut kepada bot dengan cara :
+Contoh : *.otp 743675*
+
+*Note* :
+Mengabaikan pesan ini sebanyak *5x* kamu akan di banned dan tidak bisa menggunakan bot ini lagi, untuk membuka banned silahkan hubungi owner
+`
+
 global.limit = '10'
 global.status = {
     invalid: 'URL is Invalid',

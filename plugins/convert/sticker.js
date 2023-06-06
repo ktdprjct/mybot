@@ -3,7 +3,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args }) => {
         let fetch = require("node-fetch")
         global.db.data.users[m.sender].warning += 1
         if (!m.chat.endsWith('g.us')) return conn.sendMessage(m.chat, {
-            text: global.textWarn.trim(), contextInfo: { mentionedJid: [m.sender],
+            text: global.textWarn, contextInfo: { mentionedJid: [m.sender],
                 externalAdReply: {
                     title: set.wm,
                     body: '',

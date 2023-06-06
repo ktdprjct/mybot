@@ -93,11 +93,3 @@ fs.watchFile(file, () => {
   delete require.cache[file]
   require(file)
 })
-
-let file_symbol = "database.js"
-fs.watchFile(file_symbol, () => {
-  fs.unwatchFile(file_symbol)
-  console.log(chalk.redBright("Update 'database.js'"))
-  delete require.cache[file_symbol]
-  require('./database.js')
-})

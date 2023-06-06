@@ -78,6 +78,7 @@ global.set = {
     },
     image: 'https://telegra.ph/file/0cdfed9b3524af586b4cd.jpg',
     imgAkses: 'https://telegra.ph/file/e49b6ad967144bb0ebb27.jpg',
+    gc: 'https://chat.whatsapp.com/KZwneZawhyx5udc2XzUe7W',
 }
 
 global.limit = '10'

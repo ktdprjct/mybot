@@ -151,7 +151,7 @@ Buka email dan cek pesan masuk atau di folder spam, setelah kamu mendapat kode v
 Contoh : *.otp 743675*
 
 *Note* :
-Mengabaikan pesan ini sebanyak *5x* kamu akan di banned dan tidak bisa menggunakan bot ini lagi, untuk membuka banned silahkan hubungi owner`
+Kamu tidak akan bisa menggunakan bot pada private chat jika kamu tidak mendaftarkan emailmu pada database bot`
     }[type]
     if (unreg) return this.sendMessage(m.chat, {
         text: unreg, contextInfo: { mentionedJid: [m.sender],
@@ -169,5 +169,4 @@ Mengabaikan pesan ini sebanyak *5x* kamu akan di banned dan tidak bisa menggunak
             }
         }, {quoted: m}
     )
-    
 }

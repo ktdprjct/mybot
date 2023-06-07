@@ -1,3 +1,4 @@
+const fetch = require("node-fetch")
 module.exports = (m, conn = { user: {} }) => {
     const isNumber = x => typeof x === 'number' && !isNaN(x)
     let user = global.db.data.users[m.sender]
@@ -160,7 +161,7 @@ Kamu tidak akan bisa menggunakan bot pada private chat jika kamu tidak mendaftar
                 body: '',
                 mediaType: 1,
                 showAdAttribution: true,
-                thumbnail: set.imgAkses,
+                thumbnail: await (await fetch(set.imgAkses)).buffer(),
                 thumbnailUrl: set.imgAkses,
                 renderLargerThumbnail: true,
                 sourceUrl: set.gc,

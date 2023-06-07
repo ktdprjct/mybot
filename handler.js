@@ -200,7 +200,7 @@ module.exports = {
                     }
                     
                     if (plugin.register == true && _user.registered == false) { // Need register?
-                        fail('unreg', m, this)
+                        if (!m.chat.endsWith('g.us')) return fail('unreg', m, this)
                         continue
                     }
                     

@@ -140,7 +140,34 @@ global.set.dfail = async (type, m, conn) => {
     }[type]
     if (msg) return conn.reply(m.chat, "\n*───「 ACCESS DENIED 」───*\n\n" + msg, m, { mentions: conn.parseMention(msg) })
     let unreg = { 
-        unreg: `Belum *Terdaftar,* Silahkan Daftar Dengan Mengetik *#daftar nama.umur*\n\nContoh: *#daftar ${m.name}.17*`
+        unreg: `Verifikasi nomor dengan menggunakan email, 1 email untuk memverifikasi 1 nomor WhatsApp. Silahkan ikuti step by step berikut :
+
+– *STEP 1*
+Gunakan perintah *reg <email>* untuk mendapatkan kode verifikasi melalui email.
+Contoh : *.reg ktdprjct@gmail.com*
+
+– *STEP 2*
+Buka email dan cek pesan masuk atau di folder spam, setelah kamu mendapat kode verifikasi silahkan kirim kode tersebut kepada bot dengan cara :
+Contoh : *.otp 743675*
+
+*Note* :
+Mengabaikan pesan ini sebanyak *5x* kamu akan di banned dan tidak bisa menggunakan bot ini lagi, untuk membuka banned silahkan hubungi owner`
     }[type]
-    if (unreg) return conn.sendButton(m.chat, "\n*───「 ACCESS DENIED 」───*\n\n" + unreg, set.wm, set.fla + "Please Register", [['Register', `.register ${m.name}`]], m, { asLocation: true, mentions: conn.parseMention(msg) })
+    if (unreg) return this.sendMessage(m.chat, {
+        text: unreg, contextInfo: { mentionedJid: [m.sender],
+            externalAdReply: {
+                title: set.wm,
+                body: '',
+                mediaType: 1,
+                showAdAttribution: true,
+                thumbnail: await (await fetch(set.imgAkses)).buffer(),
+                thumbnailUrl: set.imgAkses,
+                renderLargerThumbnail: true,
+                sourceUrl: set.gc,
+                mediaUrl: ``
+                }
+            }
+        }, {quoted: m}
+    )
+    
 }

@@ -4,9 +4,6 @@ let cheerio = require("cheerio")
 let { instagram } = require("@xct007/frieren-scraper")
 
 let handler = async (m, { command, usedPrefix, conn, text, args }) => {
-    if (!global.db.data.users[m.sender].registered) {
-        if (!m.chat.endsWith('g.us')) return conn.reply(m.chat, "testing", m)
-    }
     
     let lister = [
         "v1",
@@ -52,5 +49,6 @@ let spas = "                "
 handler.help = ['instagram']
 handler.tags = ['downloader']
 handler.command = /^(ig(dl)?|instagram(dl)?)$/i
+handler.register = true
 
 module.exports = handler

@@ -153,14 +153,14 @@ Contoh : *.otp 743675*
 *Note* :
 Kamu tidak akan bisa menggunakan bot pada private chat jika kamu tidak mendaftarkan emailmu pada database bot`
     }[type]
-    if (unreg) return this.sendMessage(m.chat, {
+    if (unreg) return conn.sendMessage(m.chat, {
         text: unreg, contextInfo: { mentionedJid: [m.sender],
             externalAdReply: {
                 title: set.wm,
                 body: '',
                 mediaType: 1,
                 showAdAttribution: true,
-                thumbnail: await (await fetch(set.imgAkses)).buffer(),
+                thumbnail: set.imgAkses,
                 thumbnailUrl: set.imgAkses,
                 renderLargerThumbnail: true,
                 sourceUrl: set.gc,

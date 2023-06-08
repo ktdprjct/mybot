@@ -1,24 +1,4 @@
 let handler = async (m, { conn, usedPrefix, command, text, args }) => {
-    if (!global.db.data.users[m.sender].registered) {
-        let fetch = require("node-fetch")
-        global.db.data.users[m.sender].warning += 1
-        if (!m.chat.endsWith('g.us')) return conn.sendMessage(m.chat, {
-            text: global.textWarn, contextInfo: { mentionedJid: [m.sender],
-                externalAdReply: {
-                    title: set.wm,
-                    body: '',
-                    mediaType: 1,
-                    showAdAttribution: true,
-                    thumbnail: await (await fetch(set.imgAkses)).buffer(),
-                    thumbnailUrl: set.imgAkses,
-                    renderLargerThumbnail: true,
-                    sourceUrl: set.gc,
-                    mediaUrl: ``
-                    }
-                }
-            }, {quoted: m}
-        )
-    }
     
     let err = `${set.sb} *Example* : ${usedPrefix + command} media/url\n\n_Gesek pesan ini kekanan untuk membuat *sticker*_`              
     let q = m.quoted ? m.quoted : m
@@ -38,6 +18,8 @@ handler.help = ['sticker'].map(v => v + ' <media/url>')
 handler.tags = ['sticker']
 handler.command = /^(s(tic?k(er)?)?(gif)?(video)?)$/i
 handler.desc = ['Membuat stiker dengan media foto, video atau url']
+handler.register = true
+
 module.exports = handler
 
 function isUrl(text) {

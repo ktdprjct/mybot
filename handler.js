@@ -214,13 +214,13 @@ module.exports = {
                     if (xp > 200) m.reply('Ngecit -_-') // Hehehe
                     else m.exp += xp
                     if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-                        this.sendButton(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`, wm, 0, [['Buy', '.buy1']], m)
+                        this.sendButton(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`,set.wm, 0, [['Buy', '.buy1']], m)
                         // this.reply(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`, m)
                         continue // Limit habis
                     }
                     
                     if (plugin.level > _user.level) {
-                        this.sendButton(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`, wm, 0, [['Levelup', '.levelup']], m)
+                        this.sendButton(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`,set.wm, 0, [['Levelup', '.levelup']], m)
                         // this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`, m)
                         continue // If the level has not been reached
                     }
@@ -502,7 +502,7 @@ module.exports = {
                 }).then(_=> {
                     this.reply(owner[0][0] + '@s.whatsapp.net', `*NOTIF CALLER BOT!*\n\n@${callerId.split`@`[0]} telah menelpon *${this.user.name}*\n\n ${callerId.split`@`[0]}\n`, null, { mentions: [callerId] })
                 })
-            } else this.sendHydrated(callerId, `Maaf tidak bisa menerima panggilan, Jika kamu menelepon lebih dari 5, kamu akan diblokir.\n\n${user.call} / 5`, wm, fla + "don't call", null, null, null, null, [[null, null]], null, { asLocation: true })
+            } else this.sendHydrated(callerId, `Maaf tidak bisa menerima panggilan, Jika kamu menelepon lebih dari 5, kamu akan diblokir.\n\n${user.call} / 5`,set.wm, fla + "don't call", null, null, null, null, [[null, null]], null, { asLocation: true })
         }
     }
 }

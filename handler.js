@@ -199,10 +199,10 @@ module.exports = {
                         continue
                     }
                     
-                    if (plugin.register == true && _user.registered == false) { // Need register?
+                   /* if (plugin.register == true && _user.registered == false) { // Need register?
                         if (!m.chat.endsWith('g.us')) return fail('unreg', m, this)
                         continue
-                    }
+                    }*/
                     
                     if (plugin.desc && text.includes('-h')) { //Plugin description 
                         m.reply(plugin.desc.toString())
@@ -248,6 +248,11 @@ module.exports = {
                         expiration
                     }
                     try {
+                        
+                    if (plugin.register == true && _user.registered == false) { // Need register?
+                        if (!m.chat.endsWith('g.us')) return fail('unreg', m, this)
+                    }
+                    
                         //if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return this.reply(m.chat, "tes", m)
                         
                         await plugin.call(this, m, extra)

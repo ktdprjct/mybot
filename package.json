@@ -1,6 +1,6 @@
 {
     "name": "mymd",
-    "version": "1.0.1",
+    "version": "1.9.5",
     "description": "Simple WhatsApp Bot by bit.ly/AcellComel",
     "depecrated": false,
     "main": "index.js",
@@ -41,7 +41,7 @@
     "license": "GPL-3.0-or-later",
     "dependencies": {
         "aki-api": "*",
-        "baileys": "^5.0.2",
+        "baileys": "^6.0.7",
         "@bochilteam/scraper": "^3.0.0",
         "awesome-phonenumber": "^2.69.0",
         "axios": "^0.26.0",

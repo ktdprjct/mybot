@@ -1,54 +1,36 @@
-let fetch = require("node-fetch")
-let got = require("got")
-let cheerio = require("cheerio")
 let { instagram } = require("@xct007/frieren-scraper")
+let {fetchJson} = require("../../lib/function")
 
-let handler = async (m, { command, usedPrefix, conn, text, args }) => {
-    
-    let lister = [
-        "v1",
-        "v2"
-    ]
-let spas = "                "
-    let [feature, inputs, inputs_, inputs__, inputs___] = text.split(" ")
-    if (!lister.includes(feature.toLowerCase())) return m.reply("*Example:*\n" + usedPrefix + command + " v2 link\n\n*Pilih type yg ada*\n" + lister.map((v, index) => "  ○ " + v.toUpperCase()).join("\n"))
-
-    if (lister.includes(feature)) {
-        if (feature == "v1") {
-            if (!inputs) return m.reply("Input query link")
-            m.reply("Permintaan sedang di proses")
-                try {
-                let results = await instagram.v1(inputs)
-
-                let caption = `*[ I N S T A G R A M ]*`
-                let out = results[0].url
-                await m.reply("Permintaan sedang di proses")
-                await conn.sendFile(m.chat, out, "", caption, m)
-            } catch (e) {
-                await m.reply(eror)
-            }
+let handler = async(m, {conn, text, command}) => {
+    command = command.toLowerCase()
+    switch (command) {
+        case 'ig': {
+            m.reply("*Example:*\n.igv1 link\n.igv2 link\n\n*Pilih type yg ada*\n○ igv1\n○ igv2")
         }
-        if (feature == "v2") {
-            m.reply("dalam perbaikan")
-            /*if (!inputs) return m.reply("Input query link")
-            m.reply("Permintaan sedang di proses")
-                try {
-                let results = await (await fetch("https://fantox001-scrappy-api.vercel.app/instadl?url=" + inputs)).json()
-
-                let caption = `*[ I N S T A G R A M ]*`
-                let out = results.videoUrl
-
-                await m.reply("Permintaan sedang di proses")
-                await conn.sendFile(m.chat, out, "", caption, m)
-            } catch (e) {
-                await m.reply(eror)
-            }*/
+        break;
+        
+        case 'igv1': {
+            if (!text) return m.reply(`*Masukan URL Instagram nya!*\n\nContoh : .igv1 https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`)
+            if (!text.match(/(https:\/\/www.instagram.com)/gi)) return m.reply("ini bukan link ig")
+            let results = await instagram.v1(text)
+            let out = results[0].url
+            await m.reply("Permintaan sedang di proses")
+            await conn.sendFile(m.chat, out, "", "nih", m)
         }
+        break;
+        
+        case 'igv2': {
+            if (!text) return m.reply(`*Masukan URL Instagram nya!*\n\nContoh : .igv2 https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`)
+            if (!text.match(/(https:\/\/www.instagram.com)/gi)) return m.reply("ini bukan link ig")
+            let anu = await fetchJson(`https://xzn.wtf/api/igdl?url=${text}&apikey=ktdprjct`)
+            conn.sendFile(m.chat, anu.media[0], "", anu.caption, m)
+        }
+        break;
     }
 }
-handler.help = ['instagram']
+handler.help = ['igv1', 'igv2']
 handler.tags = ['downloader']
-handler.command = /^(ig(dl)?|instagram(dl)?)$/i
+handler.command = ['ig', 'igv1', 'igv2']
 handler.register = true
 
 module.exports = handler

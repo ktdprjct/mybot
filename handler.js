@@ -250,7 +250,7 @@ module.exports = {
                     try {
                         
                     if (plugin.register == true && _user.registered == false) { // Need register?
-                        if (!m.chat.endsWith('g.us')) return fail('unreg', m, this)
+                        if (!m.chat.endsWith('g.us')) fail('unreg', m, this)
                     }
                     
                         //if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return this.reply(m.chat, "tes", m)

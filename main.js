@@ -256,7 +256,7 @@
         }
     }
     Object.freeze(global.reload);
-    //global.reloadHandler()
+    global.reloadHandler()
     
     
     // Quick Test

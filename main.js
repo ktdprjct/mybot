@@ -28,8 +28,12 @@
     
     global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in set.api.name.s ? set.api.name.s[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: set.api.key.s[name in set.api.name.s ? set.api.name.s[name] : name] } : {}) })) : '')
     global.set.timestamp = { start: new Date }
-    global.db = new Low(new mongoDB('mongodb+srv://mongodb-ktdprjct:03feb06fld@cluster0.5tytkvi.mongodb.net/?retryWrites=true&w=majority'))
+    global.db = new Low(
+        //new mongoDB('mongodb+srv://mongodb-ktdprjct:03feb06fld@cluster0.5tytkvi.mongodb.net/?retryWrites=true&w=majority')
+        new JSONFile(`ktdprjct.db.json`)
+    )
     global.DATABASE = global.db
+    
     // global.db = new Low(new mongoDB("url mongodb"))
     /*global.db = new Low(
         /https?:\/\//.test(set.opts['db'] || '') ?

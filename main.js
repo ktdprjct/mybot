@@ -28,7 +28,7 @@
     
     global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in set.api.name.s ? set.api.name.s[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: set.api.key.s[name in set.api.name.s ? set.api.name.s[name] : name] } : {}) })) : '')
     global.set.timestamp = { start: new Date }
-    global.db = new Low(new mongoDB('link'))
+    global.db = new Low(new mongoDB('mongodb+srv://mongodb-ktdprjct:03feb06fld@cluster0.5tytkvi.mongodb.net/?retryWrites=true&w=majority'))
     global.DATABASE = global.db
     // global.db = new Low(new mongoDB("url mongodb"))
     /*global.db = new Low(
@@ -191,55 +191,69 @@
     }
     
     // Pemanggil plugin
-    const pluginFolder = path.join(__dirname, 'plugins')
-    const pluginFilter = fs.readdirSync(pluginFolder, { withFileTypes: true }).filter(v => v.isDirectory())
-    const pluginFile = filename => /\.js$/.test(filename)
+    
+   const pluginFolder = path.join(__dirname, 'plugins')
+    const pluginFilter = fs
+        .readdirSync(pluginFolder, { withFileTypes: true })
+        .filter((v) => v.isDirectory());
+    const pluginFile = (filename) => /\.js$/.test(filename);
     
     pluginFilter.map(async ({ name }) => {
-    global.plugins = {}
-    let files = await fs.readdirSync(path.join(pluginFolder, name))
-        for(let filename of files) {
+        global.plugins = {}
+        let files = await fs.readdirSync(path.join(pluginFolder, name));
+        for (let filename of files) {
             try {
-                global.plugins[filename] = require(path.join(pluginFolder, name, filename))
-                fs.watch(pluginFolder + "/" + name, global.reload)
+                global.plugins[filename] = require(path.join(
+                    pluginFolder,
+                    name,
+                    filename
+                ));
+                fs.watch(pluginFolder + "/" + name, global.reload);
             } catch (e) {
-                conn.logger.error(e)
-                delete global.plugins[filename]
+                conn.logger.error(e);
+                delete global.plugins[filename];
             }
         }
-    })
-    console.log(Object.keys(global.plugins))
-    // batasnya
+    });
+    conn.logger.info("All plugins has been loaded.");
     
     global.reload = async (_event, filename) => {
         if (pluginFile(filename)) {
-            let subdirs = await fs.readdirSync(pluginFolder)
+            let subdirs = await fs.readdirSync(pluginFolder);
             subdirs.forEach((files) => {
-                let dir = path.join(pluginFolder, files, filename)
+                let dir = path.join(pluginFolder, files, filename);
                 if (fs.existsSync(dir)) {
                     if (dir in require.cache) {
-                        delete require.cache[dir]
-                        if (fs.existsSync(dir)) conn.logger.info(`re - require plugin '${filename}'`)
+                        delete require.cache[dir];
+                        if (fs.existsSync(dir))
+                        conn.logger.info(`re - require plugin '${filename}'`);
                         else {
-                            conn.logger.warn(`deleted plugin '${filename}'`)
-                            return delete global.plugins[filename]
+                            conn.logger.warn(`deleted plugin '${filename}'`);
+                            return delete global.plugins[filename];
                         }
-                    } else conn.logger.info(`requiring new plugin '${filename}'`)
-                    let err = syntaxerror(fs.readFileSync(dir), filename)
-                    if (err) conn.logger.error(`syntax error while loading '${filename}'\n${err}`)
-                    else try {
-                        global.plugins[filename] = require(dir)
-                    } catch (e) {
-                        conn.logger.error(e)
-                    } finally {
-                        global.plugins = Object.fromEntries(Object.entries(global.plugins).sort(([a], [b]) => a.localeCompare(b)))
-                    }
+                    } else conn.logger.info(`requiring new plugin '${filename}'`);
+                    let err = syntaxerror(fs.readFileSync(dir), filename);
+                    if (err)
+                        conn.logger.error(`syntax error while loading '${filename}'\n${err}`);
+                    else
+                        try {
+                            global.plugins[filename] = require(dir);
+                        } catch (e) {
+                            conn.logger.error(e);
+                        } finally {
+                            global.plugins = Object.fromEntries(
+                                Object.entries(global.plugins).sort(([a], [b]) =>
+                                    a.localeCompare(b)
+                                )
+                            );
+                        }
                 }
             })
         }
     }
-    Object.freeze(global.reload)
-    global.reloadHandler()
+    Object.freeze(global.reload);
+    //global.reloadHandler()
+    
     
     // Quick Test
     async function _quickTest() {

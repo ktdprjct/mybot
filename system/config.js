@@ -80,7 +80,7 @@ global.set = {
     imgAkses: 'https://telegra.ph/file/e49b6ad967144bb0ebb27.jpg',
     gc: 'https://chat.whatsapp.com/KZwneZawhyx5udc2XzUe7W',
 }
-
+global.xznkey = ''
 global.limit = '10'
 global.status = {
     invalid: 'URL is Invalid',

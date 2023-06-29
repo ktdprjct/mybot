@@ -1,6 +1,6 @@
 let { instagram } = require("@xct007/frieren-scraper")
 let {fetchJson} = require("../../lib/function")
-let apikey = "Filand"
+let apikey = global.xznkey
 
 let handler = async(m, {conn, text, command}) => {
     command = command.toLowerCase()

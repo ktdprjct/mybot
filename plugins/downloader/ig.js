@@ -23,8 +23,7 @@ let handler = async(m, {conn, text, command}) => {
         case 'igv2': {
             if (!text) return m.reply(`*Masukan URL Instagram nya!*\n\nContoh : .igv2 https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`)
             if (!text.match(/(https:\/\/www.instagram.com)/gi)) return m.reply("ini bukan link ig")
-            let anu = await
-            fetchJson(`https://xzn.wtf/api/igdl?url=${text}&apikey=${apikey}`)
+            let anu = await fetchJson(`https://xzn.wtf/api/igdl?url=${text}&apikey=${apikey}`)
             conn.sendFile(m.chat, anu.media[0], "", anu.caption, m)
         }
         break;

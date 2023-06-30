@@ -4,9 +4,9 @@ let package = require('../../package.json')
 let fetch = require('node-fetch')
 let levelling = require('../../lib/levelling')
 let tags = {
-  'main': 'M A I N',
+  'main': 'M A I N && I N F O',
+  'regist': 'R E G I S T R A S I',
   'game': 'G A M E',
-  'xp': 'E X P & L I M I T',
   'sticker': 'S T I C K E R',
   'group': 'G R O U P',
   'admin': 'A D M I N',
@@ -14,9 +14,6 @@ let tags = {
   'downloader': 'D O W N L O A D E R',
   'maker': 'M A K E R',
   'owner': 'O W N E R',
-  'advanced': 'A D V A N C E',
-  'host': 'H O S T',
-  'info': 'I N F O',
 }
 const defaultMenu = {
   before: `
@@ -27,13 +24,21 @@ informasi melalui WhatsApp.
 
 ◦ *name :* %me
 ◦ *Limit :* %limit
+◦ *Versi :* ${package.version}
 ◦ *Total :* %totalfitur fitur
 ◦ *Uptime :* %uptime
 ◦ *Library :* Baileys ${package.dependencies.baileys}
 
+[Info arti logo disamping fitur]
+🅛 = Fitur ini menggunakan limit
+🅟 = Fitur ini khusus user premium
+🅡 = user harus regist (khusus pc)
+☠️ = Fitur sedang di nonaktifkan
+
+
 %readmore`.trimStart(),
   header: '┌	◦ *%category*',
-  body: '│	◦ %cmd %isReg %islimit %isPremium',
+  body: '│	◦ %cmd %isDisable %isReg %islimit %isPremium',
   footer: '└	◦ ◦ ◦\n',
   after: `
 `,
@@ -86,7 +91,8 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
     let uptime = clockString(_uptime)
     let totalreg = Object.keys(global.db.data.users).length
     let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
-    let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
+    //let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
+    let help = Object.values(global.plugins).map(plugin => {
       return {
         help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
         tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
@@ -94,7 +100,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
         limit: plugin.limit,
         premium: plugin.premium,
         register: plugin.register,
-        enabled: !plugin.disabled,
+        enabled: plugin.disabled,
       }
     })
     for (let plugin of help)
@@ -117,6 +123,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
                 .replace(/%islimit/g, menu.limit ? '🅛' : '')
                 .replace(/%isPremium/g, menu.premium ? '🅟' : '')
                 .replace(/%isReg/g, menu.register ? '🅡' : '')
+                .replace(/%isDisable/g, menu.disabled ? '☠️' : '')
                 .trim()
             }).join('\n')
           }),

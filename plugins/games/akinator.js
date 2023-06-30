@@ -138,6 +138,8 @@ let handler = async(m, { conn, args }) => {
 handler.help = ['akinator']
 handler.tags = ['game']
 handler.command = /^akinator$/i
+handler.register = true
+handler.disabled = false
 
 module.exports = handler
 

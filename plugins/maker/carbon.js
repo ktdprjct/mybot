@@ -10,4 +10,7 @@ let handler = async(m, { conn, usedPrefix, command, text }) => {
 handler.help = ['carbon'].map(v => v + ' <text>')
 handler.tags = ['maker']
 handler.command = /^(code|carbon)$/i
+handler.register = true
+handler.disabled = true
+
 module.exports = handler

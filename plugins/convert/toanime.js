@@ -19,5 +19,6 @@ handler.help = ['toanime']
 handler.tags = ['sticker']
 handler.command = /^(toanime)$/i
 handler.register = true
+handler.disabled = false
 
 module.exports = handler

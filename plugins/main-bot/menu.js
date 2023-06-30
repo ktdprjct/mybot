@@ -33,7 +33,7 @@ informasi melalui WhatsApp.
 
 %readmore`.trimStart(),
   header: '┌	◦ *%category*',
-  body: '│	◦ %cmd %islimit %isPremium',
+  body: '│	◦ %cmd %isReg %islimit %isPremium',
   footer: '└	◦ ◦ ◦\n',
   after: `
 `,
@@ -93,6 +93,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
         prefix: 'customPrefix' in plugin,
         limit: plugin.limit,
         premium: plugin.premium,
+        register: plugin.register,
         enabled: !plugin.disabled,
       }
     })
@@ -115,7 +116,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
               return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
                 .replace(/%islimit/g, menu.limit ? '🅛' : '')
                 .replace(/%isPremium/g, menu.premium ? '🅟' : '')
-                .replace(/%isRegist/g, menu.regist ? '🅡' : '')
+                .replace(/%isReg/g, menu.register ? '🅡' : '')
                 .trim()
             }).join('\n')
           }),

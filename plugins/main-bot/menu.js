@@ -100,7 +100,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
         limit: plugin.limit,
         premium: plugin.premium,
         register: plugin.register,
-        enabled: plugin.disabled,
+        disabled: plugin.disabled,
       }
     })
     for (let plugin of help)

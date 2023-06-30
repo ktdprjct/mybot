@@ -30,5 +30,7 @@ handler.help = ['readviewonce']
 handler.tags = ['group']
 handler.command = /^r(vo|eadviewonce)$/i
 handler.group = true
+handler.register = true
+handler.disabled = false
 
 module.exports = handler

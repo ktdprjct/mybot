@@ -19,6 +19,7 @@ handler.tags = ['sticker']
 handler.command = /^(s(tic?k(er)?)?(gif)?(video)?)$/i
 handler.desc = ['Membuat stiker dengan media foto, video atau url']
 handler.register = true
+handler.disabled = false
 
 module.exports = handler
 

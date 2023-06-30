@@ -30,8 +30,10 @@ let handler = async (m, { conn, text, isAdmin, participants }) => {
 handler.help = ['hidetag', 'pengumuman'].map(v => v + ' [teks]')
 handler.tags = ['admin']
 handler.command = /^(pengumuman|announce|hiddentag|hidetag)$/i
-
+handler.register = true
+handler.disabled = false
 handler.group = true
+
 module.exports = handler
 
 // Aguz Familia

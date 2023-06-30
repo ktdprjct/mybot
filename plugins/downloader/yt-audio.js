@@ -11,4 +11,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
 handler.help = ['ytmp3']
 handler.tags = ['downloader']
 handler.command = /^yt(a|mp3)$/i
+handler.register = true
+handler.disabled = true
+
 module.exports = handler

@@ -15,6 +15,7 @@ handler.help = ['semoji2 😂&🥵']
 handler.tags = ['sticker']
 handler.command = /^(emojimix|semoji2|smix)$/i
 handler.register = true
+handler.limit = true
 handler.disabled = false
 
 module.exports = handler

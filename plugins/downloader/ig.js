@@ -33,5 +33,6 @@ handler.help = ['igv1', 'igv2']
 handler.tags = ['downloader']
 handler.command = ['ig', 'igv1', 'igv2']
 handler.register = true
+handler.disabled = false
 
 module.exports = handler

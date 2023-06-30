@@ -7,7 +7,7 @@ async function handler(m, { conn, isROwner }) {
   } else throw '_eeeeeiiittsssss..._'
 }
 handler.help = ['restart']
-handler.tags = ['host']
+handler.tags = ['owner']
 handler.command = /^(res(tart)?)$/i
 handler.owner = true
 module.exports =  handler

@@ -1,6 +1,6 @@
 let { generateWAMessageFromContent } = require('baileys')
 let handler = async (m, { conn, text, isAdmin, participants }) => {
-  if (!isAdmin) throw "fitur ini khusus admin!"
+  if (!isAdmin || !isOwner) throw "fitur ini khusus admin!"
   let home = participants.map(u => u.id)
   let q = m.quoted ? m.quoted : m
   let c = m.quoted ? m.quoted : m.msg

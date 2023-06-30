@@ -23,6 +23,7 @@ handler.help = ['trigger']
 handler.tags = ['sticker']
 handler.command = /^(trigger)$/i
 handler.register = true
+handler.disabled = false
 
 module.exports = handler
 function isUrl(text) {

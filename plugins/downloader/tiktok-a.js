@@ -31,6 +31,9 @@ handler.help = ['tiktokmp3'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 handler.command = /^(t(ik)?t(ok)?(d(own)?l(oader)?)?(mp3|sound|musi(c|k)|a(udio)?))$/i
 handler.limit = true
+handler.register = true
+handler.disabled = true
+
 handler.desc = ['Mendownload media audio dari Tiktok, gunakan perintah *#tiktokmp3 url* hilangkan tanda < >']
 module.exports = handler
 

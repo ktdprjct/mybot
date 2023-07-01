@@ -28,7 +28,7 @@ ${effects.map(effect => `_> ${effect}_`).join('\n')}
     }
 }
 
-handler.help = ['stickfilter (caption|reply media)']
+handler.help = ['sfilter (caption|reply media)']
 handler.tags = ['tools']
 handler.command = /^(sfilter)$/i
 handler.limit = true

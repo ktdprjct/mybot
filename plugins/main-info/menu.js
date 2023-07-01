@@ -6,14 +6,12 @@ let levelling = require('../../lib/levelling')
 let tags = {
   'main': 'M A I N && I N F O',
   'regist': 'R E G I S T R A S I',
-  'game': 'G A M E',
-  'sticker': 'S T I C K E R',
-  'group': 'G R O U P',
-  'admin': 'A D M I N',
   'internet': 'I N T E R N E T',
+  'tools': 'T O O L S',
   'downloader': 'D O W N L O A D E R',
-  'maker': 'M A K E R',
+  'group': 'G R O U P',
   'owner': 'O W N E R',
+  'game': 'G A M E',
 }
 const defaultMenu = {
   before: `

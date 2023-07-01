@@ -16,7 +16,7 @@ let handler = async (m,{ conn }) => {
     } else throw "mana gambarnya?"
 }
 handler.help = ['toanime']
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(toanime)$/i
 handler.register = true
 handler.limit = true

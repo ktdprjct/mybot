@@ -8,7 +8,7 @@ let handler = async(m, { conn, usedPrefix, command, text }) => {
   conn.sendMedia(m.chat, hasil, m)
 }
 handler.help = ['carbon'].map(v => v + ' <text>')
-handler.tags = ['maker']
+handler.tags = ['tools']
 handler.command = /^(code|carbon)$/i
 handler.register = true
 handler.disabled = true

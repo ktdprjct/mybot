@@ -29,7 +29,7 @@ ${effects.map(effect => `_> ${effect}_`).join('\n')}
 }
 
 handler.help = ['stickfilter (caption|reply media)']
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(sfilter)$/i
 handler.limit = true
 //handler.group = false

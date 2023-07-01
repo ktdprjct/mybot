@@ -89,7 +89,7 @@ global.loading = [
     "Mohon Tunggu Bot Sedang Mengirim Filenya"
   ]
   
-global.xznkey = ''
+global.xznkey = 'filand'
 global.limit = '10'
 global.status = {
     invalid: 'URL is Invalid',

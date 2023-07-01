@@ -20,7 +20,7 @@ let handler = async (m, { conn, text, args }) => {
     }
 }
 handler.help = ['semoji2 😂&🥵']
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(emojimix|semoji2|smix)$/i
 handler.register = true
 handler.limit = true

@@ -33,7 +33,7 @@ informasi melalui WhatsApp.
 🅛 = Fitur ini menggunakan limit
 🅟 = Fitur ini khusus user premium
 🅡 = user harus regist (khusus pc)
-☠️ = Fitur sedang di nonaktifkan
+🛠️ = Fitur sedang dalam perbaikan
 
 
 %readmore`.trimStart(),
@@ -123,7 +123,7 @@ let handler = async (m, { conn, usedPrefix: _p, expiration}) => {
                 .replace(/%islimit/g, menu.limit ? '🅛' : '')
                 .replace(/%isPremium/g, menu.premium ? '🅟' : '')
                 .replace(/%isReg/g, menu.register ? '🅡' : '')
-                .replace(/%isDisable/g, menu.disabled ? '☠️' : '')
+                .replace(/%isDisable/g, menu.disabled ? '🛠️' : '')
                 .trim()
             }).join('\n')
           }),

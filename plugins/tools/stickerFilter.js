@@ -15,6 +15,15 @@ ${effects.map(effect => `_> ${effect}_`).join('\n')}
     let mime = (q.msg || q).mimetype || ''
     if (!mime) throw 'mana gambarnya?'
     if (!/image\/(jpe?g|png)/.test(mime)) throw `khusus gambar`
+    
+    //loading
+    const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
+
+    for (let i = 0; i < global.loading.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 3500));
+        await  conn.editMessage(m.chat, key, global.loading[i], m)
+    }//
+            
     let img = await q.download()
     let url = await TelegraPh(img)
     

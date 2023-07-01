@@ -5,7 +5,14 @@ const { toAudio, toPTT } = require('../../lib/converter.js')
 let handler = async (m, { conn, args, usedPrefix, command }) => {
     if (!args[0]) throw `${set.sb} *Example* : ${usedPrefix + command} url`
     if (!args[0].match(/((www|vt|vm).tiktok.com)/gi)) throw `Url salah, perintah ini untuk mengunduh Media Tiktok`
-    m.react('⏱️')
+    //loading
+    const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
+
+    for (let i = 0; i < global.loading.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 3500));
+        await  conn.editMessage(m.chat, key, global.loading[i], m)
+    }//
+    
     let hias = `${set.sa}  *T I K T O K   M P 4*\n\n`
     let name = conn.getName(m.sender)
     try {

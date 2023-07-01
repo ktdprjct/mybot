@@ -3,6 +3,13 @@ let {fetchJson} = require("../../lib/function")
 let handler = async (m, { conn, text, args }) => {
     if (!args[0] || !args[2]) throw 'Contoh penggunaan:\n\n*.semoji2 🐷.😣*'
     let [emoji1, emoji2] = text.split`.`
+    //loading
+    const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
+
+    for (let i = 0; i < global.loading.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 3500));
+        await  conn.editMessage(m.chat, key, global.loading[i], m)
+    }//
     
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || q.mediaType || ''

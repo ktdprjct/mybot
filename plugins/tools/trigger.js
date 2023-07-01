@@ -20,7 +20,7 @@ let handler = async (m, { conn, args }) => {
 
 
 handler.help = ['trigger']
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(trigger)$/i
 handler.register = true
 handler.limit = true

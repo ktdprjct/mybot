@@ -245,16 +245,14 @@ module.exports = {
                         expiration
                     }
                     try {
-                        
-                    if (plugin.register == true && _user.registered == false) { // Need register?
-                        if (!m.chat.endsWith('g.us')) fail('unreg', m, this)
-                        continue
-                    }
-                    
+                        //fixed
+                        if (plugin.register == true) {
+                            if (_user.registered == false && !m.chat.endsWith('g.us')) return fail('unreg', m, this)
+                        }
                         //if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return this.reply(m.chat, "tes", m)
-                        
                         await plugin.call(this, m, extra)
                         if (!isPrems) m.limit = m.limit || plugin.limit || false
+                        
                     } catch (e) {
                         // Error occured
                         m.error = e

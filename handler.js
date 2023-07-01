@@ -213,17 +213,14 @@ module.exports = {
                     let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 // XP Earning per command
                     if (xp > 200) m.reply('Ngecit -_-') // Hehehe
                     else m.exp += xp
-                    if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-                        this.sendButton(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`,set.wm, 0, [['Buy', '.buy1']], m)
-                        // this.reply(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`, m)
+                    if (plugin.limit && !_user.registered && _user.limit < plugin.limit * 1) {
+                        //this.sendButton(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`,set.wm, 0, [['Buy', '.buy1']], m)
+                        this.reply(m.chat, `Limit anda habis, silahkan
+                        mendaftarkan diri di database untuk mendapatkan
+                        limit unlimited`, m)
                         continue // Limit habis
                     }
                     
-                    if (plugin.level > _user.level) {
-                        this.sendButton(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`,set.wm, 0, [['Levelup', '.levelup']], m)
-                        // this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`, m)
-                        continue // If the level has not been reached
-                    }
                     let extra = {
                         match,
                         usedPrefix,

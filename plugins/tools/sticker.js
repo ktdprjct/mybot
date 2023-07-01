@@ -15,7 +15,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args }) => {
     conn.sendSticker(m.chat, media, m, {author: set.auth, asSticker: /webp/g.test(mime) })
 }
 handler.help = ['sticker'].map(v => v + ' <media/url>')
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(s(tic?k(er)?)?(gif)?(video)?)$/i
 handler.desc = ['Membuat stiker dengan media foto, video atau url']
 handler.register = true

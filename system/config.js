@@ -80,6 +80,15 @@ global.set = {
     imgAkses: 'https://telegra.ph/file/e49b6ad967144bb0ebb27.jpg',
     gc: 'https://chat.whatsapp.com/KZwneZawhyx5udc2XzUe7W',
 }
+global.loading = [
+    "《 ▒▒▒▒▒▒▒▒▒▒ 》0%",
+    "《 ██▒▒▒▒▒▒▒▒ 》20%",
+    "《 █████▒▒▒▒▒ 》50%",
+    "《 ███████▒▒▒ 》70%",
+    "《 ██████████ 》100%",
+    "Mohon Tunggu Bot Sedang Mengirim Filenya"
+  ]
+  
 global.xznkey = ''
 global.limit = '10'
 global.status = {

@@ -11,7 +11,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
         await  conn.editMessage(m.chat, key, global.loading[i], m)
     }//
     
-    const { thumbnail, audio: _audio, title } = await youtubedl(args[0]).catch(async _ => await youtubedlv2(args[0])).catch(async _ => await youtubedlv3(args[0]))
+    const { thumbnail, audio: _audio, title } = await youtubedlv2(args[0]).catch(async _ => await youtubedlv3(args[0]))
     let audio, res, link
     
     for (let i in _audio) {

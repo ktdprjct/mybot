@@ -1,7 +1,7 @@
 let {fetchJson} = require("../../lib/function")
 
 let handler = async (m, { conn, text, args }) => {
-    if (!args[0] || !args[2]) throw 'Contoh penggunaan:\n\n*.semoji2 🐷.😣*'
+    if (!text.includes('.')) throw 'Contoh penggunaan:\n\n*.semoji2 🐷.😣*'
     let [emoji1, emoji2] = text.split`.`
     //loading
     const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
@@ -19,7 +19,7 @@ let handler = async (m, { conn, text, args }) => {
         conn.sendSticker(m.chat, res.url, m, {author: set.auth, asSticker: /webp/g.test(mime) })
     }
 }
-handler.help = ['semoji2 😂&🥵']
+handler.help = ['semoji2 😂.🥵']
 handler.tags = ['tools']
 handler.command = /^(emojimix|semoji2|smix)$/i
 handler.register = true

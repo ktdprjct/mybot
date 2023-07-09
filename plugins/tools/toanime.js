@@ -5,7 +5,7 @@ let { TelegraPh } = require('../../lib/uploader')
 let handler = async (m,{ conn }) => {
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || ''
-    let download = await q.download()
+    let download = await q.download(true)
     if (/image/g.test(mime)) {
         let link = await TelegraPh(download)
         let bf = (await

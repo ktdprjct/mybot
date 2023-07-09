@@ -215,9 +215,7 @@ module.exports = {
                     else m.exp += xp
                     if (plugin.limit && !_user.registered && _user.limit < plugin.limit * 1) {
                         //this.sendButton(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`,set.wm, 0, [['Buy', '.buy1']], m)
-                        this.reply(m.chat, `Limit anda habis, silahkan
-                        mendaftarkan diri di database untuk mendapatkan
-                        limit unlimited`, m)
+                        this.reply(m.chat, `Limit anda habis, silahkan mendaftarkan diri di database untuk mendapatkan limit unlimited`, m)
                         continue // Limit habis
                     }
                     

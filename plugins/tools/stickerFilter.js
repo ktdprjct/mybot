@@ -19,10 +19,10 @@ ${effects.map(effect => `_> ${effect}_`).join('\n')}
     //loading
     const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
 
-    for (let i = 0; i < global.loading.length; i++) {
+    /*for (let i = 0; i < global.loading.length; i++) {
         await new Promise(resolve => setTimeout(resolve, 3500));
         await  conn.editMessage(m.chat, key, global.loading[i], m)
-    }//
+    }*/
             
     let img = await q.download(true)
     let url = await TelegraPh(img)

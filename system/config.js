@@ -90,7 +90,7 @@ global.loading = [
   ]
   
 global.xznkey = 'filand'
-global.limit = '10'
+global.limit = '100'
 global.status = {
     invalid: 'URL is Invalid',
 }

@@ -2,23 +2,22 @@ let { UploadFileUgu, webp2mp4File, TelegraPh } = require('../../lib/uploader')
 let handler = async (m, { conn, text, args}) => {
     let [t1, t2] = text.split`.`
     if (!text.includes('/')) throw 'textnya mana\n contoh: .memegen text atas/text bawah'
-    if (!m.quoted) throw "reply gambarnya!"
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || q.mediaType || ''
     if (!mime) throw `Mana fotonya?`
     if (!/image\/(jpe?g|png)/.test(mime)) throw `hanya gambar!!!`
     
     //loading
-    const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
+    /*const { key } = await conn.reply(m.chat, 'Tunggu sebentar...', m);
 
     for (let i = 0; i < global.loading.length; i++) {
         await new Promise(resolve => setTimeout(resolve, 3500));
         await  conn.editMessage(m.chat, key, global.loading[i], m)
-    }//
+    }*/
     
     let media 
     try {
-        media = await q.download()
+        media = await q.download(true)
     } catch {
         if (isUrl(args[0] || '')) media = args[0]
     } 

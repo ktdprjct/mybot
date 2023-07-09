@@ -24,7 +24,7 @@ ${effects.map(effect => `_> ${effect}_`).join('\n')}
         await  conn.editMessage(m.chat, key, global.loading[i], m)
     }//
             
-    let img = await q.download()
+    let img = await q.download(true)
     let url = await TelegraPh(img)
     
     let apiUrl = global.API('https://some-random-api.com/canvas/', encodeURIComponent(effect), {

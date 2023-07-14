@@ -3,8 +3,9 @@ let {fetchJson} = require("../../lib/function")
 let fetch = require("node-fetch")
 let handler = async(m, { conn }) => {
     let q = m.quoted ? m.quoted : m
-    if (!q) throw "media not found"
     let mime = (q.msg || q).mimetype || q.mediaType || ''
+    if (!mime) throw 'mana gambarnya?'
+    if (!/image\/(jpe?g|png)/.test(mime)) throw `khusus gambar`
     let media = await q.download(true)
     let tele = await TelegraPh(media)
     

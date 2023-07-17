@@ -4,9 +4,9 @@ let timeout = 300000
 
 let handler = async(m, {conn, text}) => {
     conn.sendMail = conn.sendMail ? conn.sendMail : {}
-    let id = m.chat
+    let id = m.sender
     if (id in conn.sendMail) {
-        conn.reply(m.chat, 'Silahkan cek kode otp pada emailmu. Jika email yang kamu masukkan salah kamu harus menunggu 5 menit agar bisa menggunakan ulang command ini', conn.sendMail[id][0])
+        conn.reply(m.chat, `Silahkan cek kode otp yang dikirim bot ke email ${conn.sendMail[id].email}\nJika email yang kamu masukkan salah kamu harus menunggu 5 menit agar bisa menggunakan ulang command ini`, m)
         throw false
     }
     if(!text) throw "silahkan masukkan email anda!"
@@ -17,6 +17,13 @@ let handler = async(m, {conn, text}) => {
         otp = otp * 1000000;
         otp = parseInt(otp);
         console.log(otp);
+        
+    conn.sendMail[id] = {
+        id: m.sender,
+        names: name,
+        email: text,
+        otpCode: otp,
+    }
     
     const iniHtml = `
         <!DOCTYPE html>
@@ -25,7 +32,7 @@ let handler = async(m, {conn, text}) => {
                 <meta charset="UTF-8">
             </head>
             <body>
-                <p>kode otpmu adalah<h1> ${otp}</h1></p>
+                <p>Hai ${conn.sendMail[id].name} kode otpmu adalah :<h1> ${conn.sendMail[id].otp}</h1></p>
             </body>
         </html>`
     
@@ -42,7 +49,7 @@ let handler = async(m, {conn, text}) => {
     
     const mailOptions = {
         from: '"ktdprjct"<ktdprjct@gmail.com>',
-        to: text,
+        to: conn.sendMail[id].email,
         subject: "Email Verification",
         html: iniHtml
     }
@@ -51,16 +58,12 @@ let handler = async(m, {conn, text}) => {
         if(error) {
             console.log(error)
         } else {
-            conn.reply(m.chat, `silahkan cek email ${text} untuk melihat code otp`, m)
+            conn.reply(m.chat, `silahkan cek email ${conn.sendMail[id].email} untuk melihat code otp`, m)
         }
     })
     
-    conn.sendMail[id] = {
-        id: m.sender,
-        email: text,
-        otpCode: otp,
-    }
-    let ingfo = `「 *ADÀ YANG DAFTAR NIH!* 」\n\n💌 EMAIL : ${text}\n🔗 CODE OTP : ${otp}\n✨ STATUS  : proses`
+    let ingfo = `「 *ADÀ YANG DAFTAR NIH!* 」\n\n💌 EMAIL : ${conn.sendMail[id].email}\n🔗 CODE OTP : ${conn.sendMail[id].otp}\n✨ STATUS
+    : proses`
     await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
 
     setTimeout(() => {

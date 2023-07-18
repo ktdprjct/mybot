@@ -30,6 +30,10 @@ let handler = async(m, { conn, text }) => {
         }
             break;
         
-        
     }
 }
+handler.command = handler.help = ["sf", "delfitur", "openfile"]
+handler.tags = ['owner']
+handler.owner = true
+
+module.exports = handler

@@ -62,8 +62,7 @@ let handler = async(m, {conn, text}) => {
         }
     })
     
-    let ingfo = `「 *ADÀ YANG DAFTAR NIH!* 」\n\n💌 EMAIL : ${conn.sendMail[id].email}\n🔗 CODE OTP : ${conn.sendMail[id].otp}\n✨ STATUS
-    : proses`
+    let ingfo = `「 *ADÀ YANG DAFTAR NIH!* 」\n\n💌 EMAIL : ${conn.sendMail[id].email}\n🔗 CODE OTP : ${conn.sendMail[id].otp}\n✨ STATUS : proses`
     await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
 
     setTimeout(() => {

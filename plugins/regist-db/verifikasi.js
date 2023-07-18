@@ -19,6 +19,7 @@ let handler = async(m, { conn, text }) => {
         delete conn.sendMail[id]
         } else conn.reply(m.chat, "otp yang kamu masukkan salah, silahkan masukkan ulang codenya", m)
     }
+    await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
 }
 handler.help = ['otp']
 handler.tags = ['regist']

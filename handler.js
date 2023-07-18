@@ -245,7 +245,9 @@ module.exports = {
                     try {
                         //fixed
                         if (plugin.register == true) {
-                            if (_user.registered == false && !m.chat.endsWith('g.us')) return fail('unreg', m, this)
+                            if (!isOwner) {
+                                if (_user.registered == false && !m.chat.endsWith('g.us')) return fail('unreg', m, this)
+                            }
                         }
                         //if (!global.db.data.users[m.sender].registered && !m.chat.endsWith('g.us')) return this.reply(m.chat, "tes", m)
                         await plugin.call(this, m, extra)

@@ -1,12 +1,12 @@
 let fs = require("fs")
 
-let handler = async(m, { conn, text }) => {
+let handler = async(m, { conn, command, text }) => {
     command = command.toLowerCase()
     switch (command) {
         
         case 'sf': {
             if (!text) throw `where is the path?\n\nexample:\n.sf plugins/main-info/menu.js`
-            if (!m.quoted.text) throw `reply code`
+            if (!m.quoted) throw `reply code`
             
             let path = `${text}`
             await fs.writeFileSync(path, m.quoted.text)
@@ -18,15 +18,15 @@ let handler = async(m, { conn, text }) => {
             if (!text) throw `where is the path?\n\nexample:\n.delfitur plugins/main-info/menu.js`
             
             await fs.unlinkSync(text)
-            m.reply(`Delete ${path} to file!`)
+            m.reply(`Delete ${text} to file!`)
         }
             break;
         
         case 'openfile': {
             if (!text) throw `where is the path?\n\nexample:\n.openfile plugins/main-info/menu.js`
-            
+        
             let pile = await fs.readFileSync(text)
-            await conn.sendFile(m.chat, pile, '', 'Nihh,?', m)
+            await conn.sendFile(m.chat, pile, text, 'Nihh,?', m)
         }
             break;
         

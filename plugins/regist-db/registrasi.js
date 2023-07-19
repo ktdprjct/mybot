@@ -3,6 +3,8 @@ const nodemailer = require("nodemailer")
 let timeout = 300000
 
 let handler = async(m, {conn, text}) => {
+    let user = global.db.data.users[m.sender]
+    if(user.registered === true) throw "kamu sudah terdaftar di database bot"
     conn.sendMail = conn.sendMail ? conn.sendMail : {}
     let id = m.sender
     if (id in conn.sendMail) {

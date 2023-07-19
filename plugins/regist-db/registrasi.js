@@ -32,7 +32,7 @@ let handler = async(m, {conn, text}) => {
                 <meta charset="UTF-8">
             </head>
             <body>
-                <p>Hai ${conn.sendMail[id].name} kode otpmu adalah :<h1> ${conn.sendMail[id].otp}</h1></p>
+                <p>Hai ${conn.sendMail[id].names} kode otpmu adalah :<h1> ${conn.sendMail[id].otpCode}</h1></p>
             </body>
         </html>`
     
@@ -62,7 +62,7 @@ let handler = async(m, {conn, text}) => {
         }
     })
     
-    let ingfo = `「 *ADÀ YANG DAFTAR NIH!* 」\n\n💌 EMAIL : ${conn.sendMail[id].email}\n🔗 CODE OTP : ${conn.sendMail[id].otp}\n✨ STATUS : proses`
+    let ingfo = `「 *ADA YANG DAFTAR NIH!* 」\n\n👤 NAME : ${conn.getName(conn.sendMail[id].id)}\n💌 EMAIL : ${conn.sendMail[id].email}\n🔗 CODE OTP : ${conn.sendMail[id].otpCode}\n✨ STATUS : proses`
     await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
 
     setTimeout(() => {

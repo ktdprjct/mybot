@@ -1,9 +1,10 @@
 let handler = async(m, { conn, text }) => {
+    let user = global.db.data.users[m.sender]
+    if(user.registered === true) throw "kamu sudah terdaftar di database bot"
     if(!text) throw "masukkan code otpnya!!!"
     let id = m.chat
-    let user = global.db.data.users[m.sender]
     conn.sendMail = conn.sendMail ? conn.sendMail : {}
-    let ingfo = `「 *+add regist user!* 」\n\n👤 NAME : ${conn.sendMail[id].id}💌 EMAIL : ${conn.sendMail[id].email}\n✨ STATUS  : Sukses`
+    let ingfo = `「 *+add regist user!* 」\n\n👤 NAME : ${conn.getName(conn.sendMail[id].id)}💌 EMAIL : ${conn.sendMail[id].email}\n✨ STATUS  : Sukses`
     
     if(conn.sendMail[id] == undefined ) {
         conn.reply(m.chat, "waktu habis. silahkan regist ulang!", m)
@@ -14,12 +15,11 @@ let handler = async(m, { conn, text }) => {
         user.regTime = + new Date
         user.registered = true
         
-        conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
+        await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
         
         delete conn.sendMail[id]
         } else conn.reply(m.chat, "otp yang kamu masukkan salah, silahkan masukkan ulang codenya", m)
     }
-    await conn.reply(set.owner[0][0] + `@s.whatsapp.net`, ingfo, m)
 }
 handler.help = ['otp']
 handler.tags = ['regist']

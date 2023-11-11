@@ -1,15 +1,17 @@
 let fetch = require("node-fetch")
-let { youtubeSearch, youtubedl, youtubedlv2 } = require('@bochilteam/scraper')
+const yts = require("youtube-yts")
 let handler = async(m, {conn, text, command, args, usedPrefix}) => {
     if(!text) throw conn.sendMessage(m.chat, `Contoh: ${usedPrefix + command} judul atau url`)
     
-    let Tot = await youtubeSearch(args[0])
-    let vid = Tot.video[0]
+    let link = await yts(args[0])
+    let vid = link.all[0]
     let texts = `
-Judul: ${vid.title}
-desc: ${vid.description}
-Durasi: ${vid.durationH}
-Publish: ${vid.publishedTime}`
+➥ ᴛɪᴛʟᴇ: ${vid.title}
+➥ ᴠɪᴇᴡs: ${vid.views}
+➥ ᴀᴜᴛʜᴏʀ: ${vid.author.name}
+➥ ᴅᴜʀᴀᴛɪᴏɴ: ${vid.timestamp}
+➥ ᴜᴘʟᴏᴀᴅ ᴏɴ: ${vid.ago}
+➥ ᴜʀʟ: ${vid.url}`
 
     conn.sendMessage(m.chat, {image: {url: vid.thumbnail}, caption: texts})
     
